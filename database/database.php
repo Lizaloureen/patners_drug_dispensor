@@ -10,7 +10,7 @@ class Database {
         $this->hostname = "localhost";
         $this->username = "root";
         $this->password = "";
-        $this->dbname = "me-dawa";
+        $this->dbname = "mymedicine";
 
         try{
             $this->connection = new PDO("mysql:host=$this->hostname;dbname=$this->dbname", $this->username, $this->password);
