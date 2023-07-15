@@ -4,32 +4,33 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../Static/nav.scss">
     <title>Pharmacy Portal</title>
+    <link rel="stylesheet" href="../Static/homepage.css">
+    <link rel="stylesheet" href="../Static/form.scss">
+    <link rel="icon" href="../images/logo.jpg">
 </head>
 <body>
-      <!-- the navigation bar -->
-<div>
-  <nav class="navbar">
-      <!-- LOGO -->
-      <div class="logo">Dispensor</div>
+    <div>
+        <nav class="navbar">
+            <!-- LOGO -->
+            <div class="logo">Me-Dawa</div>
 
-      <!-- NAVIGATION MENU -->
-      <ul class="nav-links">
-          <div class="menu">
-            <li>
-              <?php 
-              session_start();
-              $username = $_SESSION['username'];
-              echo "Welcome, $username";
-              ?>
-              </li>
-              <li><a href="../Templates/homepage.html">Home</a></li>
-              <li><a href="../config/signout.php">Sign Out</a></li>
-          </div>
-      </ul>
-  </nav>
-</div>
+            <!-- NAVIGATION MENU -->
+            <ul class="nav-links">
+                <div class="menu">
+                    <li>
+                        <?php 
+                        // session_start();
+                        // $username = $_SESSION['username'];
+                        // echo "Welcome, $username";
+                        ?>
+                    </li>
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Sign Out</a></li>
+                </div>
+            </ul>
+        </nav>
+    </div>
     <?php
         require_once '../database/database.php';
 
@@ -42,7 +43,7 @@
         $start_index = ($current_page - 1) * $results_per_page; // Calculate the starting index for results
 
         // Get users from the database
-        $drugs = $database->getAllDrugs($start_index, $results_per_page);
+        $users = $database->getApprovedDrugs($start_index, $results_per_page, $entity);
 
         // Display users in a table
         echo '
@@ -60,19 +61,19 @@
               <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Drug Company</th>
               <th style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">Action</th>
           </tr>';
-          foreach ($drugs as $drug) {
+          foreach ($users as $user) {
               echo ' <tr>
-                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $drug['ID'] . '</td>
-                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $drug['drugName'] . '</td>
-                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $drug['drugDescription'] . '</td>
-                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $drug['drugPrice'] . '</td>
-                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $drug['drugQuantity'] . '</td>
-                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $drug['drugExpirationDate'] . '</td>
-                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $drug['drugManufacturingDate'] . '</td>
-                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $drug['drugCompany'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['ID'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugName'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugDescription'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugPrice'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugQuantity'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugExpirationDate'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugManufacturingDate'] . '</td>
+                        <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">' . $user['drugCompany'] . '</td>
                         <td style="padding: 8px; text-align: center; border-bottom: 1px solid #ddd; color: #333;">
                             <form method="POST" action="../config/pharmacy.php">
-                              <input type="hidden" name="drugID" value="' . $drug['ID'] . '">
+                              <input type="hidden" name="drugID" value="' . $user['ID'] . '">
                               <input type="submit" name="dispense" value="dispense" style="background-color: red; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">
                             </form>
                         </td>
@@ -102,6 +103,38 @@
 
         
         ?>
+
+    <footer class="footer">
+    <div class="footer-container">
+      <div class="row">
+        <div class="footer-col">
+          <h3>About Us</h3>
+          <p>Excellence</p>
+        </div>
+        <div class="footer-col">
+          <h3>Contact Us</h3>
+          <ul>
+            <li>Address: 123 Main St, Anytown </li>
+            <li>Phone: 555-123-4567</li>
+            <li>Email: info@example.com</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Follow Us</h3>
+          <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="footer-col">
+          <p>&copy; 2023 Me-Dawa. All rights reserved.</p>
+        </div>
+      </div>
+    </div>
+  </footer>
     
     
 </body>
