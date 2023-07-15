@@ -36,7 +36,6 @@
         // Create an instance of the database class
         $database = new Database();
         $patientID = $_SESSION['username'];
-        $entity = $_SESSION['entity'];
         $results_per_page = 5; // Number of results per page
         $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // Get the current page from URL
         $start_index = ($current_page - 1) * $results_per_page; // Calculate the starting index for results
