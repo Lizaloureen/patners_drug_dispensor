@@ -12,7 +12,7 @@
 <div>
 <nav class="navbar">
     <!-- LOGO -->
-    <div class="logo">Me-Dawa</div>
+    <div class="logo">Add Drugs</div>
     <!-- NAVIGATION MENU -->
     <ul class="nav-links">
         <div class="menu">
@@ -34,12 +34,6 @@
 <div>
 	<!-- code here -->
 	<div class="card">
-		<div class="card-image">	
-			<h2 class="card-heading">
-				Welcome back<br>
-				<small>Add drugs here</small>
-			</h2>
-		</div>
 		<form class="card-form" method="post" action="../config/pharmaceuticalCompany.php">
 			<div class="input">
 				<input type="text" class="input-field" name="drugName"  required/>
