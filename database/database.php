@@ -361,5 +361,19 @@ class Database {
         return $result;
     }
 
+    // get drugs row based in the ID
+    function getDrug($ID){
+        // Prepare statement
+        $stmt = $this->connection->prepare("SELECT * FROM drugs WHERE ID = :ID");
+        $stmt->bindParam(':ID', $ID);
+    
+        // Execute statement
+        $stmt->execute();
+    
+        // Fetch data
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
 }
 ?>
