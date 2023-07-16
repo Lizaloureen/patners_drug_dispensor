@@ -1,21 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <link rel="stylesheets  " href="Static\doctor.scss"> -->
-    <link rel="stylesheet" href="../Static/doctor.scss">
-    <link rel="stylesheet" href="../Static/nav.scss">
-    <title>Document</title>
+    <title>Doctor Portal</title>
+    <link rel="stylesheet" href="../Static/form.scss">
+    <link rel="stylesheet" href="../Static/homepage.css">
+    <link rel="icon" href="../images/logo.jpg">
 </head>
 <body>
-
-
-  <!-- the navigation bar -->
+<!--The Navigation Bar-->
 <div>
   <nav class="navbar">
       <!-- LOGO -->
-      <div class="logo">Doctor Portal</div>
+      <div class="logo">Dispensor</div>
 
       <!-- NAVIGATION MENU -->
       <ul class="nav-links">
@@ -27,14 +23,15 @@
               // echo "Welcome, $username";
               ?>
               </li>
-              <li><a href="#">Home</a></li>
-              <li><a href="#">Sign Out</a></li>
+              <li><a href="../Templates/homepage.html">Home</a></li>
+              <li><a href="../config/signout.php">Sign Out</a></li>
           </div>
       </ul>
   </nav>
 </div>
 
-<!-- view prescription history here -->
+
+	
 
 <?php
         require_once '../database/database.php';
@@ -48,7 +45,7 @@
         $start_index = ($current_page - 1) * $results_per_page; // Calculate the starting index for results
 
         // Query to fetch users from the database based on the entity and pagination
-        $users = $database->getUsersByEntityAndIDForDoctor($entity, $doctorSSN, $start_index, $results_per_page);
+        $users = $database->getUsersByEntityAndIDForDoctor($entity, $doctorID, $start_index, $results_per_page);
 
         // Display users in a table
         echo '
@@ -95,23 +92,27 @@
         echo '</div>';
         
         ?>
+        <div class="card">
+		<div class="card-image">	
+			<h2 class="card-heading">
+				Welcome Doc<br>
+				<small>Add Prescription</small>
+			</h2>
+		</div>
+		  <form class="card-form" method="post" action="../config/doctor.php">
+			  <div class="input">
+				  <input type="number" class="input-field" name="patientID"  required/>
+				  <label class="input-label">Patient ID</label>
+			  </div>
 
-<!-- Add prescription in this form -->
-<div class="login-box">
-  <h2>Add Prescription</h2>
-  <form>
-    <div class="user-box">
-      <input type="number" name="patientSSN" required>
-      <label>Patient SSN</label>
-    </div>
-
-    <div class="input">
+        <!-- getting the drug names from the db -->
+        <div class="input">
 				  <select name="  drugID" id="drugID" class="input-field" value="">
             <option value="" class="input" disabled selected>Drug Name</option>
             <?php
               include_once '../database/database.php';
               $database = new database();
-              $items = $database->getAllDrugs();
+              $items = $database->getDrugs();
               foreach ($items as $item):
             ?>
             <option class="input" value="<?php $item['ID'] ?>" <?php echo $item['drugName'] ?> "><?php echo $item['drugName'] ?></option> 
@@ -120,22 +121,57 @@
           </select>
 			  </div>
 
-    <div class="user-box">
-      <input type="text" name="prescriptionDescription" required="">
-      <label>Prescription Description</label>
+        <div class="input">
+          <input type="text" class="input-field" name="prescriptionDescription" required/>
+          <label class="input-label">Prescription Description</label>
+        </div>
+        <div class="input">
+				  <input type="date" class="input-field" name="prescriptionDuration"  required/>
+				  <label class="input-label">Prescription Duration</label>
+			  </div>   
+        <div class="input">
+          <input type="text" class="input-field" name="prescriptionNotes" required/>
+          <label class="input-label">Prescription Notes</label>
+        </div>
+        <div class="action">
+          <input type="submit" class="action-button" value="Add Prescription" />
+        </div>
+      </form>
+	</div>
+</div>
+
+<!--The footer-->
+<footer class="footer">
+    <div class="footer-container">
+      <div class="row">
+        <div class="footer-col">
+          <h3>About Us</h3>
+          <p>Excellence</p>
+        </div>
+        <div class="footer-col">
+          <h3>Contact Us</h3>
+          <ul>
+            <li>Address: 123 Main St, Anytown </li>
+            <li>Phone: 555-123-4567</li>
+            <li>Email: info@example.com</li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Follow Us</h3>
+          <ul>
+            <li><a href="#">Facebook</a></li>
+            <li><a href="#">Twitter</a></li>
+            <li><a href="#">Instagram</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="row">
+        <div class="footer-col">
+          <p>&copy; 2023 Me-Dawa. All rights reserved.</p>
+        </div>
+      </div>
     </div>
-    <div class="user-box">
-      <input type="text" name="prescriptionDescription" required="">
-      <label>Prescription Notes</label>
-    </div>
-    <a href="../config/doctor.php">
-      <span></span>
-      <span></span>
-      <span></span>
-      <span></span>
-      Add Prescription
-    </a>
-  </form>
+  </footer>
 </div>
 </body>
 </html>

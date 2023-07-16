@@ -44,7 +44,7 @@
       <ul class="nav-links">
           <div class="menu">
             <li>
-              <?php 
+              <?php
               session_start();
               $username = $_SESSION['username'];
               echo "Welcome, $username";
