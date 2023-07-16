@@ -375,5 +375,22 @@ class Database {
         return $result;
     }
 
+
+    //Adding meds to the database (Pharmaceuticals)
+    function addMeds($drugName, $drugDescription, $drugPrice, $drugQuantity, $drugExpirationDate, $drugManufacturingDate, $drugCompany){
+        //Prepare statement
+        $stmt = $this->connection->prepare("INSERT INTO drugs (drugName, drugDescription, drugPrice, drugQuantity, drugExpirationDate, drugManufacturingDate, drugCompany) VALUES (:drugName, :drugDescription, :drugPrice, :drugQuantity, :drugExpirationDate, :drugManufacturingDate, :drugCompany)");
+        $stmt->bindParam(':drugName', $drugName);
+        $stmt->bindParam(':drugDescription', $drugDescription);
+        $stmt->bindParam(':drugPrice', $drugPrice);
+        $stmt->bindParam(':drugQuantity', $drugQuantity);
+        $stmt->bindParam(':drugExpirationDate', $drugExpirationDate);
+        $stmt->bindParam(':drugManufacturingDate', $drugManufacturingDate);
+        $stmt->bindParam(':drugCompany', $drugCompany);
+
+        //Execute statement
+        $stmt->execute();
+    }
+
 }
 ?>
