@@ -278,8 +278,8 @@ class Database {
 
     function getUsersByEntityAndIDForDoctor($entity, $doctorSSN, $start_index, $results_per_page){
         // Prepare statement
-        $stmt = $this->connection->prepare("SELECT * FROM prescriptions WHERE doctorSSN = :doctorSSN LIMIT :start_index, :results_per_page");
-        $stmt->bindParam(':doctorSSN', $doctorSSN);
+        $stmt = $this->connection->prepare("SELECT * FROM prescriptions WHERE doctorID = :doctorID LIMIT :start_index, :results_per_page");
+        $stmt->bindParam(':doctorID', $doctorID);
         $stmt->bindParam(':start_index', $start_index, PDO::PARAM_INT);
         $stmt->bindParam(':results_per_page', $results_per_page, PDO::PARAM_INT);
     

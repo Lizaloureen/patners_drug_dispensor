@@ -11,7 +11,7 @@
 <div>
   <nav class="navbar">
       <!-- LOGO -->
-      <div class="logo">Dispensor</div>
+      <div class="logo">Doctor Portal</div>
 
       <!-- NAVIGATION MENU -->
       <ul class="nav-links">
