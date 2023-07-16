@@ -348,5 +348,18 @@ class Database {
         }
     }
 
+    // Select everything from entity
+    function getEntity($entity){
+        // Prepare statement
+        $stmt = $this->connection->prepare("SELECT * FROM $entity");
+    
+        // Execute statement
+        $stmt->execute();
+    
+        // Fetch data
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
+
 }
 ?>
