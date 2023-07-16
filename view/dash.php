@@ -76,7 +76,7 @@
     <section id="sidebar">
         <a href="#" class="brand">
             <i class='bx bxs-smile'></i>
-            <span class="text">Me-dawa</span>
+            <span class="text">My Medicine</span>
         </a>
         <ul class="side-menu top">
             <li class="active">
@@ -100,7 +100,7 @@
             <li>
                 <a href="dash.php?action=viewCompanies">
                     <i class='bx bxs-group' ></i>
-                    <span class="text">View Pharmaceutical</span>
+                    <span class="text">View Pharmaceuticals</span>
                 </a>
             </li>
             <li>
