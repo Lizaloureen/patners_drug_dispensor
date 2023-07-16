@@ -66,14 +66,14 @@
 
         // Create an instance of the database class
         $database = new Database();
-        $patientID = $_SESSION['username'];
-        $entity = $_SESSION['entity'];
+        // $patientID = $_SESSION['username'];
+        // $entity = $_SESSION['entity'];
         $results_per_page = 5; // Number of results per page
         $current_page = isset($_GET['page']) ? $_GET['page'] : 1; // Get the current page from URL
         $start_index = ($current_page - 1) * $results_per_page; // Calculate the starting index for results
 
         // Query to fetch users from the database based on the entity and pagination
-        $users = $database->getUsersByEntityAndIDForPatient($entity, $patientSSN, $start_index, $results_per_page);
+        $users = $database->getUsersByEntityAndIDForPatient('patients', $patientID, $start_index, $results_per_page);
 
         // Display users in a table
         echo '
