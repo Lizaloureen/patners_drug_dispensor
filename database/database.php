@@ -10,7 +10,7 @@ class Database {
         $this->hostname = "localhost";
         $this->username = "root";
         $this->password = "";
-        $this->dbname = "mymedicine";
+        $this->dbname = "my-medicine";
 
         try{
             $this->connection = new PDO("mysql:host=$this->hostname;dbname=$this->dbname", $this->username, $this->password);
@@ -81,7 +81,7 @@ class Database {
     }
 
     //Login using SSN and password for patients
-    public function patientLogin($SSN, $password)
+    public function patientLogin($ID, $password)
     {
         try {
             $stmt = $this->connection->prepare("SELECT * FROM patient WHERE patientssn = ?");
@@ -218,7 +218,7 @@ class Database {
     // get all drugs
     function getAllDrugs($start_index, $results_per_page){
         try {
-            $stmt = $this->connection->prepare("SELECT * FROM drug LIMIT $start_index, $results_per_page");
+            $stmt = $this->connection->prepare("SELECT * FROM drugs LIMIT $start_index, $results_per_page");
             $stmt->execute();
             $result = $stmt->fetchAll();
             return $result;

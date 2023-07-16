@@ -15,16 +15,16 @@
 <div>
   <nav class="navbar">
       <!-- LOGO -->
-      <div class="logo">Dispensor</div>
+      <div class="logo">Doctor Portal</div>
 
       <!-- NAVIGATION MENU -->
       <ul class="nav-links">
           <div class="menu">
             <li>
               <?php 
-              session_start();
-              $username = $_SESSION['username'];
-              echo "Welcome, $username";
+              // session_start();
+              // $username = $_SESSION['username'];
+              // echo "Welcome, $username";
               ?>
               </li>
               <li><a href="#">Home</a></li>
