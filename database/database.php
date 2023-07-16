@@ -306,5 +306,47 @@ class Database {
         return $result;
     }
 
+    // delete drugs from the database
+    function deleteDrug($ID){
+        // Prepare statement
+        $stmt = $this->connection->prepare("DELETE FROM drugs WHERE ID = :ID");
+        $stmt->bindParam(':ID', $ID);
+    
+        // Execute statement
+        $stmt->execute();
+    
+        // If it works return true
+        if($stmt){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    // update drugs in the database
+    function updateDrug($ID, $drugName, $drugDescription, $drugPrice, $drugQuantity, $drugExpirationDate, $drugManufacturingDate, $drugCompany, $Approved){
+        // Prepare statement
+        $stmt = $this->connection->prepare("UPDATE drugs SET drugName = :drugName, drugDescription = :drugDescription, drugPrice = :drugPrice, drugQuantity = :drugQuantity, drugExpirationDate = :drugExpirationDate, drugManufacturingDate = :drugManufacturingDate, drugCompany = :drugCompany, approved = :Approved WHERE ID = :ID");
+        $stmt->bindParam(':ID', $ID);
+        $stmt->bindParam(':drugName', $drugName);
+        $stmt->bindParam(':drugDescription', $drugDescription);
+        $stmt->bindParam(':drugPrice', $drugPrice);
+        $stmt->bindParam(':drugQuantity', $drugQuantity);
+        $stmt->bindParam(':drugExpirationDate', $drugExpirationDate);
+        $stmt->bindParam(':drugManufacturingDate', $drugManufacturingDate);
+        $stmt->bindParam(':drugCompany', $drugCompany);
+        $stmt->bindParam(':Approved', $Approved);
+    
+        // Execute statement
+        $stmt->execute();
+    
+        // If it works return true
+        if($stmt){
+            return true;
+        } else {
+            return false;
+        }
+    }
+
 }
 ?>
